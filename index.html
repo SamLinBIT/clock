@@ -426,9 +426,6 @@
       setMotto();
       timezone = getQueryVariable("timezone") ? getQueryVariable("timezone") : 8
       style = getQueryVariable("style") ? getQueryVariable("style") : (getCookieStyle() ? getCookieStyle() : 0)
-      if(style == 0){
-        showTips("TIPS","try these urls:\n/clock?timezone=+10&style=3\n/clock?motto=hello\\nworld\ntips closing in 10s",10000);
-      }
       clock_start();
       changeStyle();
       fontSizeAutoChange();
