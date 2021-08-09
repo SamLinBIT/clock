@@ -206,7 +206,7 @@
         if(zenmode_time == 0){
           console.log("zenmode:relax")
           zenmode_relax_time = zenRelaxTime;
-          flash(1000);
+          flash(500);
           updateZenRelaxTime();
           clearInterval(zenmode_relax_interval_id);
           clearInterval(zenmode_interval_id);
@@ -223,7 +223,7 @@
         if(zenmode_relax_time == 0){
           console.log("zenmode concentrate")
           zenmode_time = zenTime;
-          flash(1000);
+          flash(500);
           updateZenTime();
           clearInterval(zenmode_relax_interval_id);
           clearInterval(zenmode_interval_id);
@@ -244,67 +244,6 @@
             pageDiv.classList.remove('style-smaller-motto');
             pageDiv.classList.add('style-remove-motto')
             setWidgetHeight(clientHeight, 0.7, 0.3, 0);
-            style = 2;
-            break;
-          case 2:
-          case "2":
-            saveStyle(style);
-            pageDiv.classList.add('style-rotate270');
-            pageDiv.classList.add('style-larger-time')
-            pageDiv.classList.add('style-remove-motto')
-            setWidgetHeight(clientWidth, 0.7, 0.3, 0); 
-            var bais = (clientHeight - clientWidth) / 2;
-            setPage(clientHeight, clientWidth, bais, -bais);
-// hack for kindle 1
-            timeDiv.innerHTML = ""
-            setTimeout("style = 22; changeStyle();", 1);
-            break;
-          case 22:
-            timeDiv.innerHTML = last_time;
-// hack for kindle 1 done
-            style = 3;
-            break;
-          case 3:
-          case "3":
-            saveStyle(style);
-            pageDiv.classList.remove('style-rotate270');
-            pageDiv.classList.add('style-larger-time');
-            pageDiv.classList.add('style-remove-motto');
-            setWidgetHeight(clientWidth, 0.7, 0.3, 0);
-            var bais = (clientHeight - clientWidth) / 2;
-// hack for kindle 2
-            setPage(clientHeight*0.5, clientWidth*0.5, bais, -bais);
-            setTimeout("style = 33; changeStyle();", 1);
-            break;
-          case 33:
-            timeDiv.innerHTML = ""
-            pageDiv.classList.add('style-rotate90');
-            setPage(clientHeight, clientWidth, bais, -bais);
-            setTimeout("style = 333; changeStyle();", 1);
-            break;
-          case 333:
-            timeDiv.innerHTML = last_time;
-// hack for kindle 2 done
-            style = 4;
-            break;
-          case 4:
-          case "4":
-            saveStyle(style);
-            pageDiv.classList.remove('style-rotate90');
-            pageDiv.classList.remove('style-remove-motto')
-            pageDiv.classList.add('style-remove-date')
-            pageDiv.classList.add('style-default');
-            setWidgetHeight(clientHeight, 0.7, 0, 0.3);
-            setPage(clientWidth, clientHeight, 0, 0);
-            clock_stop();
-            zenModeStart();
-// hack for kindle 3
-            timeDiv.innerHTML = ""
-            setTimeout("style = 44; changeStyle();", 1);
-          break;
-          case 44:
-            timeDiv.innerHTML = zenTime
-// hack for kindle 3 done
             style = 5;
             break;
           case 5:
@@ -346,7 +285,7 @@
         date.setMinutes(date.getMinutes() + utc8DiffMinutes);
         if (date.getMinutes() == 0 &&  date.getHours() != last_flash) {
           last_flash = date.getHours();
-          flash(1000);
+          flash(500);
         }
         var timeString = date.getHours() + ':' + ('0' + date.getMinutes()).slice(-2)
         var dateString = (date.getMonth() + 1) + '-' + date.getDate()
@@ -360,6 +299,8 @@
       }
 
       function flash(time) {
+        document.body.style.backgroundColor = '#FFF';
+        setTimeout("document.body.style.backgroundColor = '#000';",time)
         document.body.style.backgroundColor = '#000';
         setTimeout("document.body.style.backgroundColor = '#FFF';",time)
       }
@@ -406,7 +347,7 @@
       }
 
       function saveStyle(s){
-        var cookie = "style="+ s +"; expires=Thu, 18 Dec 2043 12:00:00 GMT"
+        var cookie = "style="+ s +"; expires=Thu, 18 Dec 2099 12:00:00 GMT"
 		    document.cookie = cookie
         _czc.push(["_trackEvent","kindle","style",s,"time"])
       }
