@@ -237,12 +237,10 @@
       function changeStyle() {
         var clientHeight = document.documentElement.clientHeight;
         var clientWidth = document.documentElement.clientWidth;
-        switch (style) {         
+        switch (style) {
           case 4:
           case "4":
             saveStyle(style);
-            pageDiv.classList.remove('style-rotate90');
-            pageDiv.classList.remove('style-remove-motto')
             pageDiv.classList.add('style-remove-date')
             pageDiv.classList.add('style-default');
             setWidgetHeight(clientHeight, 0.7, 0, 0.3);
